@@ -1,7 +1,7 @@
 package tpmacc.starter.api;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,12 +15,17 @@ public class GreetingController {
 
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/param")
+    @GetMapping()
+    Greeting defaultGreeting() {
+        return new Greeting(counter.incrementAndGet(), "Hello again!");
+    }
+
+    @GetMapping("/param")
     Greeting greetingWithRequestParam(@RequestParam(value="name", defaultValue="World") String name) {
         return new Greeting(counter.incrementAndGet(), String.format("Hello, %s", name));
     }
 
-    @RequestMapping("/variable")
+    @GetMapping("/variable")
     Greeting greetingWithEnvironmentVariable() {
         return new Greeting(counter.incrementAndGet(), String.format("Hello, %s", variable));
     }
