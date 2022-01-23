@@ -1,5 +1,12 @@
-server:
-  port: 9002
 
 starter:
   variable: application.yaml
+
+# expose actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    info:
+      enabled: true
