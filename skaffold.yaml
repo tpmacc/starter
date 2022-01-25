@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2beta25
+kind: Config
+build:
+  artifacts:
+  - image: tpmacc/starter
+    jib:
+      fromImage: openjdk:11-slim
+  tagPolicy:
+    gitCommit: {}
+deploy:
+  kubectl:
+    manifests:
+    - target/classes/META-INF/dekorate/*.yml
